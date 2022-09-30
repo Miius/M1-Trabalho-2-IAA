@@ -24,9 +24,10 @@ public class EnemyMovimentRayCast : MonoBehaviour
     void Raycast()
     {
         RaycastHit forward;
+        
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out forward, Mathf.Infinity))
         {
-            float d = Vector3.Distance(transform.position, forward.point);
+             float d = Vector3.Distance(transform.position, forward.point);
 
             if (d >= 10 && far)
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * forward.distance, Color.white);
