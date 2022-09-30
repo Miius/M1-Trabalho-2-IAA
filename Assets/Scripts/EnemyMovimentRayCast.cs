@@ -27,13 +27,13 @@ public class EnemyMovimentRayCast : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out forward, Mathf.Infinity))
         {
             float d = Vector3.Distance(transform.position, forward.point);
-            
-            if (d >= 15)
+
+            if (d >= 10 && far)
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * forward.distance, Color.white);
             else
             {
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * forward.distance, Color.red);
-
+                
                 transform.position += transform.forward * Time.deltaTime * speed * 2*-1;
             }
         }
@@ -48,6 +48,8 @@ public class EnemyMovimentRayCast : MonoBehaviour
             
             if (l > r)
                 Turn(turnForce * -1);
+            else
+                Turn(turnForce);
         }
 
 
@@ -60,6 +62,8 @@ public class EnemyMovimentRayCast : MonoBehaviour
             
             if (r > l)
                 Turn(turnForce);
+            else
+                Turn(turnForce * -1);
         }
         
         
