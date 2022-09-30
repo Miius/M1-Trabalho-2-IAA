@@ -12,17 +12,13 @@ public class EnemyMovimentRayCast : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.LeftArrow))
+        /*if (Input.GetKey(KeyCode.LeftArrow))
             Turn(turnForce * -1);
         if (Input.GetKey(KeyCode.RightArrow))
-            Turn(turnForce);
-
+            Turn(turnForce);*/
         Raycast();
-
-        if (far)
-            Move();
-        else
-            Move();
+        
+        Move();
     }
 
     void Raycast()
@@ -30,15 +26,15 @@ public class EnemyMovimentRayCast : MonoBehaviour
         RaycastHit forward;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out forward, Mathf.Infinity))
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * forward.distance, Color.yellow);
             float d = Vector3.Distance(transform.position, forward.point);
             
-            if (d >= 10)
+            if (d >= 15)
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * forward.distance, Color.white);
             else
             {
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * forward.distance, Color.red);
-                transform.position += transform.forward * Time.deltaTime * speed * 2 * -1;
+
+                transform.position += transform.forward * Time.deltaTime * speed * 2*-1;
             }
         }
 
@@ -46,24 +42,24 @@ public class EnemyMovimentRayCast : MonoBehaviour
         RaycastHit left;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left + Vector3.forward), out left, Mathf.Infinity))
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.left + Vector3.forward) * left.distance, Color.yellow);
             l = Vector3.Distance(transform.position, left.point);
            
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.left + Vector3.forward) * left.distance, Color.red);
-                if (l > r)
-                    Turn(turnForce * -1);
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.left + Vector3.forward) * left.distance, Color.red);
+            
+            if (l > r)
+                Turn(turnForce * -1);
         }
 
 
         RaycastHit right;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right + Vector3.forward), out right, Mathf.Infinity))
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right + Vector3.forward) * right.distance, Color.yellow);
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right + Vector3.forward) * right.distance, Color.blue);
+            
             r = Vector3.Distance(transform.position, right.point);
-           
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right + Vector3.forward) * right.distance, Color.blue);
-                if (r > l)
-                    Turn(turnForce);
+            
+            if (r > l)
+                Turn(turnForce);
         }
         
         
