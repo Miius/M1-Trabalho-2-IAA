@@ -6,8 +6,9 @@ using UnityEngine;
 public class EnemyMovimentRayCast : MonoBehaviour
 {
     bool far = true;
-    int speed = 10;
-    int turnForce = 10;
+    int speed = 25;
+    int turnForce = 90;
+    float l, r;
 
     void Update()
     {
@@ -16,86 +17,64 @@ public class EnemyMovimentRayCast : MonoBehaviour
         if (Input.GetKey(KeyCode.RightArrow))
             Turn(turnForce);
 
-        RaycastForward();
-        RaycastRight();
-        RaycastLeft();
+        Raycast();
 
         if (far)
             Move();
         else
-            transform.position += transform.forward * Time.deltaTime * speed * -1;
+            Move();
     }
 
-    void RaycastForward()
+    void Raycast()
     {
         RaycastHit forward;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out forward, Mathf.Infinity))
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * forward.distance, Color.yellow);
             float d = Vector3.Distance(transform.position, forward.point);
-            Debug.Log(d);
-            if (d >= 5)
-            {
+            
+            if (d >= 10)
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * forward.distance, Color.white);
-                far = true;
-            }
             else
             {
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * forward.distance, Color.red);
-                far = false;
+                transform.position += transform.forward * Time.deltaTime * speed * 2 * -1;
             }
-
         }
-    }
 
-    void RaycastLeft()
-    {
+
         RaycastHit left;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left + Vector3.forward), out left, Mathf.Infinity))
         {
-            float d = Vector3.Distance(transform.position, left.point);
-            if (d >= 10)
-            {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.left + Vector3.forward) * left.distance, Color.white);
-                Turn(-50);
-                //transform.rotation *= Quaternion.Euler(0, -90, 0);
-            }
-            else
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.left + Vector3.forward) * left.distance, Color.yellow);
+            l = Vector3.Distance(transform.position, left.point);
+           
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.left + Vector3.forward) * left.distance, Color.red);
+                if (l > r)
+                    Turn(turnForce * -1);
         }
-    }
 
 
-    void RaycastRight()
-    {
         RaycastHit right;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right + Vector3.forward),
-                out right, Mathf.Infinity))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right + Vector3.forward), out right, Mathf.Infinity))
         {
-
-            float d = Vector3.Distance(transform.position, right.point);
-            //Debug.Log(d);
-            if (d >= 10)
-            {
-                Turn(50);
-                Debug.DrawRay(transform.position,
-                    transform.TransformDirection(Vector3.right + Vector3.forward) * right.distance, Color.blue);
-            }
-            else
-            {
-
-                Debug.DrawRay(transform.position,
-                    transform.TransformDirection(Vector3.right + Vector3.forward) * right.distance, Color.red);
-            }
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right + Vector3.forward) * right.distance, Color.yellow);
+            r = Vector3.Distance(transform.position, right.point);
+           
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right + Vector3.forward) * right.distance, Color.blue);
+                if (r > l)
+                    Turn(turnForce);
         }
+        
+        
     }
 
-    void Move()
+    public void Move()
     {
         transform.position += transform.forward * Time.deltaTime * speed;
     }
 
-    void Turn(int value)
+    public void Turn(int value)
     {
         transform.rotation *= Quaternion.Euler(0, value * Time.deltaTime, 0);
     }
