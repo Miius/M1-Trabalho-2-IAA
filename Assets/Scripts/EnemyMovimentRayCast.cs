@@ -2,77 +2,99 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyMovimentRayCast : MonoBehaviour
 {
     bool far = true;
-    int speed = 25;
-    int turnForce = 90;
-    float l, r;
+    public float speed;
+    int turnForce = 180;
+    float l, r,d;
+    public bool debuga;
+    int random;
+
 
     void Update()
     {
-        /*if (Input.GetKey(KeyCode.LeftArrow))
-            Turn(turnForce * -1);
-        if (Input.GetKey(KeyCode.RightArrow))
-            Turn(turnForce);*/
-        Raycast();
-        
-        Move();
+        Raycast();             
     }
 
     void Raycast()
     {
-        RaycastHit forward;
-        
+        RaycastHit forward;       
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out forward, Mathf.Infinity))
         {
-             float d = Vector3.Distance(transform.position, forward.point);
-
-            if (d >= 10 && far)
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * forward.distance, Color.white);
-            else
-            {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * forward.distance, Color.red);
+            
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * forward.distance, Color.white);
+            d = Vector3.Distance(transform.position, forward.point);
+            
                 
-                transform.position += transform.forward * Time.deltaTime * speed * 2*-1;
+            Move(speed);
+            if(d < 15 && far)
+            {
+                far = false;
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * forward.distance, Color.red);              
+                random = Random.Range(0, 2);
+                if(debuga)
+                    Debug.Log(random);
+                
+                
+            }
+            if(!far)
+            {
+                speed = -10;
+                switch (random)
+                {
+                    case 0:
+                        transform.rotation *= Quaternion.Euler(0, 360 * Time.deltaTime, 0);
+                        break;
+                    case 1:
+                        transform.rotation *= Quaternion.Euler(0, 360 * Time.deltaTime * -1, 0);
+                        break;
+                }
+                if (d > 20)
+                {
+                    far = true;
+                }               
+            }
+            if (far)
+                speed = d / 1.2f;
+        }
+        RaycastHit left;
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left + Vector3.forward), out left, 40))
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.left + Vector3.forward) * left.distance, Color.red);
+            l = Vector3.Distance(transform.position, left.point);
+            if(l < 5)
+            {              
+                    Turn(turnForce * 2);
             }
         }
 
-
-        RaycastHit left;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.left + Vector3.forward), out left, Mathf.Infinity))
-        {
-            l = Vector3.Distance(transform.position, left.point);
-           
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.left + Vector3.forward) * left.distance, Color.red);
-            
-            if (l > r)
-                Turn(turnForce * -1);
-            else
-                Turn(turnForce);
-        }
-
-
         RaycastHit right;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right + Vector3.forward), out right, Mathf.Infinity))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.right + Vector3.forward), out right, 40))
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.right + Vector3.forward) * right.distance, Color.blue);
-            
             r = Vector3.Distance(transform.position, right.point);
             
+            if (l < 5)
+            {
+                Turn(turnForce * 2 * -1);
+            }
+        }
+        if (far)
+        {
             if (r > l)
                 Turn(turnForce);
-            else
+            if (l > r)
                 Turn(turnForce * -1);
         }
-        
         
     }
 
-    public void Move()
+    public void Move(float value)
     {
-        transform.position += transform.forward * Time.deltaTime * speed;
+        transform.position += transform.forward * Time.deltaTime * value;
     }
 
     public void Turn(int value)
