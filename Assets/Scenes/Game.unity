@@ -178,7 +178,6 @@ MonoBehaviour:
   CellWidth: 30
   CellHeight: 30
   AddGaps: 0
-  keys: {fileID: 4131060499544193177, guid: c605d6ada7399944fa5521c89a3acd23, type: 3}
 --- !u!1 &1261138291
 GameObject:
   m_ObjectHideFlags: 0
