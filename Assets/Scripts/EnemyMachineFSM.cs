@@ -9,8 +9,8 @@ public class EnemyMachineFSM : MonoBehaviour
 
     void Start()
     {
-        SetState(new SleepStateFSM(this));
-        energy = 3;
+        // SetState(new ScapeStateFSM(this));
+        // energy = 3;
     }
 
     void FixedUpdate()
