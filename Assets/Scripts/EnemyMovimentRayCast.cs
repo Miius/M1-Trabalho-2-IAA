@@ -7,13 +7,13 @@ using Random = UnityEngine.Random;
 public class EnemyMovimentRayCast : MonoBehaviour
 {
     bool far = true;
-    public float speed;
-    int turnForce = 180;
+    
+    float speed = 25;
     float l, r,d;
-    public bool debuga;
+    
+    int turnForce = 180;
     int random;
-
-
+    
     void Update()
     {
         Raycast();             
@@ -27,18 +27,13 @@ public class EnemyMovimentRayCast : MonoBehaviour
             
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * forward.distance, Color.white);
             d = Vector3.Distance(transform.position, forward.point);
-            
-                
+
             Move(speed);
             if(d < 15 && far)
             {
                 far = false;
                 Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * forward.distance, Color.red);              
                 random = Random.Range(0, 2);
-                if(debuga)
-                    Debug.Log(random);
-                
-                
             }
             if(!far)
             {
@@ -53,10 +48,9 @@ public class EnemyMovimentRayCast : MonoBehaviour
                         break;
                 }
                 if (d > 20)
-                {
                     far = true;
-                }               
             }
+            
             if (far)
                 speed = d / 1.2f;
         }
@@ -66,9 +60,7 @@ public class EnemyMovimentRayCast : MonoBehaviour
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.left + Vector3.forward) * left.distance, Color.red);
             l = Vector3.Distance(transform.position, left.point);
             if(l < 5)
-            {              
-                    Turn(turnForce * 2);
-            }
+                Turn(turnForce * 2);
         }
 
         RaycastHit right;
@@ -78,9 +70,7 @@ public class EnemyMovimentRayCast : MonoBehaviour
             r = Vector3.Distance(transform.position, right.point);
             
             if (l < 5)
-            {
                 Turn(turnForce * 2 * -1);
-            }
         }
         if (far)
         {
@@ -89,7 +79,6 @@ public class EnemyMovimentRayCast : MonoBehaviour
             if (l > r)
                 Turn(turnForce * -1);
         }
-        
     }
 
     public void Move(float value)

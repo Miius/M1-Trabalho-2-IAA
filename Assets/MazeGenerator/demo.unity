@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -503,7 +503,7 @@ MonoBehaviour:
   CellWidth: 4
   CellHeight: 4
   AddGaps: 0
-  GoalPrefab: {fileID: 159624, guid: 850205124263c924ea0aa82f0fdf2673, type: 3}
+  GoalPrefab: {fileID: 0}
 --- !u!115 &999177115
 MonoScript:
   m_ObjectHideFlags: 0
