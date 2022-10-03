@@ -35,6 +35,10 @@ public class EnemyMachineFSM : MonoBehaviour
     {
         return TargetDir().magnitude < 6.0f;
     }
+    public bool CollideWithTarget()
+    {
+        return TargetDir().magnitude < 1.0f;
+    }
 
     public void Move(Vector3 dir)
     {

@@ -12,20 +12,20 @@ public class ScapeStateFSM : StateFSM
 
     public void Enter() 
     {
-        // time = Time.time + 3;
         Debug.Log("Enter Scape State");
     }
 
     public void Update() 
     {
-        // if (Time.time > time)
-        // {
-        //     enemy.SetState(new PatrolStateFSM(enemy));
-        // }
+        if (enemy.IsNearTarget())
+        {
+            
+        }
     }
 
     public void Exit() 
     {
+        enemy.SetState(new PatrolStateFSM(enemy));
         // enemy.energy = 3;
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FollowStateFSM : StateFSM
 {
@@ -16,16 +17,16 @@ public class FollowStateFSM : StateFSM
 
     public void Update()
     {
-        // enemy.Move(enemy.TargetDir().normalized);
-
-        // if (enemy.energy < 0)
-        // {
-        //     enemy.SetState(new ScapeStateFSM(enemy));
-        // }
-        // if (enemy.IsNearTarget() == false)
-        // {
-        //     enemy.SetState(new FollowStateFSM(enemy));
-        // }
+        if (enemy.IsNearTarget())
+        {
+            if (enemy.CollideWithTarget())
+            {
+                SceneManager.LoadScene("Game");
+            }
+            enemy.SetState(new FollowStateFSM(enemy));
+        }
+        else
+            enemy.SetState(new PatrolStateFSM(enemy));
     }
 
     public void Exit() {}

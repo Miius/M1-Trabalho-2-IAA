@@ -19,7 +19,7 @@ public class EnemyMovimentRayCast : MonoBehaviour
         Raycast();             
     }
 
-    void Raycast()
+    public void Raycast()
     {
         RaycastHit forward;       
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out forward, Mathf.Infinity))
