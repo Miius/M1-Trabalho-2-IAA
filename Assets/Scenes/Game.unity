@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 718ac387d76707b45a3160702795b0cb, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 4423d04e3760a384b922ee416de98c66, type: 2}
 --- !u!1 &979677421
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,8 +171,8 @@ MonoBehaviour:
   FullRandom: 1
   RandomSeed: 12345
   Floor: {fileID: 2751421025919179655, guid: a287f8de23d1320449dd8dd24cfa9cbb, type: 3}
-  Wall: {fileID: 5766784971647962516, guid: dc59c5609114aa4498d731717335d791, type: 3}
-  Pillar: {fileID: 3439267852688682617, guid: 9e7f6f029a049404ba37cbba7b9d1ea0, type: 3}
+  Wall: {fileID: 7823596913672343003, guid: dc59c5609114aa4498d731717335d791, type: 3}
+  Pillar: {fileID: 3130931088271399680, guid: 9e7f6f029a049404ba37cbba7b9d1ea0, type: 3}
   Rows: 10
   Columns: 10
   CellWidth: 30
@@ -426,7 +426,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f20d0de271a9b9247b3163b5b40131b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bakeNavMesh: {fileID: 1992430835}
   mazeSpawner: {fileID: 979677423}
 --- !u!4 &1885967929
 Transform:
@@ -484,7 +483,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1992430836}
-  - component: {fileID: 1992430835}
   m_Layer: 0
   m_Name: Bake NavMesh
   m_TagString: Untagged
@@ -492,19 +490,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1992430835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1992430834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9200a12379de97644999060f4a747867, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  navMeshSurface: {fileID: 4515718667829889324}
 --- !u!4 &1992430836
 Transform:
   m_ObjectHideFlags: 0

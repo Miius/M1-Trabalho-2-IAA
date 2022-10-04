@@ -11,13 +11,12 @@ GameObject:
   - component: {fileID: 5066843936547084208}
   - component: {fileID: 5066843936547084213}
   - component: {fileID: 5066843936547084214}
-  - component: {fileID: 5066843936547084215}
   m_Layer: 0
   m_Name: Walls_Labirynth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 95
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &5066843936547084208
 Transform:
@@ -84,19 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5066843936547084215
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5066843936547084209}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7823596913672343003
 GameObject:
   m_ObjectHideFlags: 0
@@ -107,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2979444830745842003}
   - component: {fileID: 9040025019686892679}
+  - component: {fileID: 5118480382288482868}
   m_Layer: 0
   m_Name: Walls_Labirynth
   m_TagString: Untagged
@@ -142,7 +129,20 @@ NavMeshObstacle:
   m_Shape: 1
   m_Extents: {x: 14, y: 10, z: 1.75}
   m_MoveThreshold: 0.1
-  m_Carve: 0
+  m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 10, z: 0}
   m_TimeToStationary: 0.5
+--- !u!65 &5118480382288482868
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7823596913672343003}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 28, y: 20, z: 3.5}
+  m_Center: {x: 0, y: 10, z: 0}
