@@ -427,6 +427,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mazeSpawner: {fileID: 979677423}
+  playerTarget: {fileID: 7981420963629791945, guid: 3483f4d973048204386921c1c34835b5, type: 3}
+  scapeTarget: {fileID: 8744420300820780315, guid: 5d39dfd728282874390fb5df53baafc9, type: 3}
 --- !u!4 &1885967929
 Transform:
   m_ObjectHideFlags: 0

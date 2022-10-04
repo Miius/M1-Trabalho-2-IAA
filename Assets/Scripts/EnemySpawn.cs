@@ -7,7 +7,7 @@ public class EnemySpawn : MonoBehaviour
 {
    [SerializeField] private GameObject enemyPrefab;
 
-   private void Start()
+   private void Awake()
    {
       GameObject enemy;
       enemy = Instantiate(enemyPrefab,new Vector3(transform.position.x, transform.position.y + 10, transform.position.z) , Quaternion.identity, this.transform);
