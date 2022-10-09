@@ -11,6 +11,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private MazeSpawner mazeSpawner;
 
     [SerializeField] private Transform playerTarget;
+    public Transform PlayerTarget
+    {
+        get { return playerTarget; }
+        set { playerTarget = value; }
+    }
     [SerializeField] private Transform scapeTarget;
     void Awake()
     {
@@ -19,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        foreach (var navMeshMoviment in FindObjectsOfType<NavMeshMoviment>())
-            navMeshMoviment.ReciveTarget(scapeTarget);
+        // foreach (var navMeshMoviment in FindObjectsOfType<NavMeshMovement>())
+        //     // navMeshMoviment.ReciveTarget(scapeTarget);
     }
 }

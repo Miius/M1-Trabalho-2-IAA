@@ -19,8 +19,14 @@ public class ScapeStateFSM : StateFSM
     {
         if (enemy.IsNearTarget())
         {
-            
+            if (enemy.CollideWithTarget())
+            {
+                enemy.Die();
+            }
+            enemy.SetState(new ScapeStateFSM(enemy));
         }
+        else
+            enemy.SetState(new PatrolStateFSM(enemy));
     }
 
     public void Exit() 

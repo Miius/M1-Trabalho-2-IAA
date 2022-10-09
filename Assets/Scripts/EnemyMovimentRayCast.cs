@@ -16,7 +16,7 @@ public class EnemyMovimentRayCast : MonoBehaviour
     
     void Update()
     {
-        Raycast();             
+        // Raycast();             
     }
 
     public void Raycast()

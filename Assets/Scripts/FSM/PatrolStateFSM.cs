@@ -18,7 +18,17 @@ public class PatrolStateFSM : StateFSM
 
     public void Update()
     {
-        enemy.GetComponent<EnemyMovimentRayCast>().Raycast();
+        if (enemy.IsNearTarget())
+        {
+            Debug.Log("perto");
+            enemy.SetState(new FollowStateFSM(enemy));
+        }
+        else
+        {
+            // enemy.GetComponent<EnemyMovimentRayCast>().Raycast();
+            enemy.GetComponent<NavMeshMovement>().Patrolling();
+            // enemy.SetState(new PatrolStateFSM(enemy));
+        }
     }
 
     public void Exit() {}

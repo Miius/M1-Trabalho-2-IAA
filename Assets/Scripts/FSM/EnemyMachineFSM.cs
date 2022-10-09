@@ -1,21 +1,33 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class EnemyMachineFSM : MonoBehaviour
+public class EnemyMachineFSM : MonoBehaviour, ObserverInterface
 {
     StateFSM state;
-    public Transform target;
-    public float energy;
-    public float speed;
+    [SerializeField] private Transform target;
+    public Transform Target
+    {
+        get { return target; }
+        set { target = value; }
+    }
+    // public float speed;
+    // public float energy;
 
     void Start()
     {
-        // SetState(new ScapeStateFSM(this));
+        // SubjectPlayer.instance.notify += NotifyObserver;
+        Target = GameObject.Find("Player").transform;
+        SetState(new PatrolStateFSM(this));
         // energy = 3;
     }
 
     void FixedUpdate()
     {
         state?.Update();
+    }
+
+    public void NotifyObserver(){
+        SetState(new ScapeStateFSM(this));
     }
 
     public void SetState(StateFSM state)
@@ -27,22 +39,43 @@ public class EnemyMachineFSM : MonoBehaviour
 
     public Vector3 TargetDir()
     {
+
         Vector3 dir = target.position - transform.position;
         return dir;
     }
 
     public bool IsNearTarget()
     {
-        return TargetDir().magnitude < 6.0f;
+        bool near = false;
+        RaycastHit hit;
+        Vector3 tg = new Vector3(target.position.x, 2.5f, target.position.z);
+        if (Physics.Raycast(transform.position, tg, out hit))
+        {
+            // Debug.DrawLine(transform.position,tg,Color.white,1.0f);
+            if(hit.collider.transform == target){
+                Debug.DrawLine(transform.position,tg,Color.white,1.0f);
+                near = true;
+            }
+        }
+        return near;
     }
     public bool CollideWithTarget()
     {
-        return TargetDir().magnitude < 1.0f;
+        return TargetDir().magnitude < 15.0f;
     }
 
-    public void Move(Vector3 dir)
+    // public void Move(Vector3 dir)
+    // {
+    //     energy -= Time.fixedDeltaTime;
+    //     transform.position += dir * speed * Time.fixedDeltaTime;
+    // }
+
+    public void Die()
     {
-        energy -= Time.fixedDeltaTime;
-        transform.position += dir * speed * Time.fixedDeltaTime;
+        Destroy(this.gameObject);
+    }
+    public void GotThePlayer()
+    {
+        SceneManager.LoadScene("Teste");
     }
 }
