@@ -14,7 +14,7 @@ public class FollowStateFSM : StateFSM
     {
         Debug.Log("Enter Follow State");
         // enemy.GetComponent<NavMeshMovement>().ReciveTarget(enemy.Target);
-        enemy.GetComponent<NavMeshMovement>().MoveTo(enemy.Target);
+        enemy.GetComponent<NavMeshMovement>().MoveTo(enemy.Target.position);
 
     }
 
@@ -25,22 +25,14 @@ public class FollowStateFSM : StateFSM
             if (enemy.CollideWithTarget())
             {
                 enemy.GotThePlayer();
-                // enemy.Target = null;
-                // enemy.SetState(new PatrolStateFSM(enemy));
             }
-            enemy.GetComponent<NavMeshMovement>().MoveTo(enemy.Target);
-            // enemy.GetComponent<NavMeshMovement>().Move();
-            // enemy.SetState(new FollowStateFSM(enemy));
+            enemy.GetComponent<NavMeshMovement>().MoveTo(enemy.Target.position);
         }
         else
         {
             Debug.Log("sumiu");
-            // enemy.GetComponent<NavMeshMovement>().ReciveTarget(null);
-            // enemy.GetComponent<NavMeshMovement>().ReciveTarget(null);
-            // enemy.GetComponent<NavMeshMovement>().MoveTo(null);
             enemy.SetState(new PatrolStateFSM(enemy));
         }
-            // enemy.Target = null;
     }
 
     public void Exit() {

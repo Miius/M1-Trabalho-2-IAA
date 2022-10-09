@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class NavMeshMovement : MonoBehaviour
 {
     public Transform destination = null;
-    
+
     NavMeshAgent navMeshAgent;
 
     public Vector3 walkPoint;
@@ -15,12 +15,13 @@ public class NavMeshMovement : MonoBehaviour
     public bool isStoped = false;
 
 
-    private void Start() {
+    private void Start()
+    {
         StartCoroutine(DoCheck());
     }
     void Awake()
     {
-        navMeshAgent = GetComponent<NavMeshAgent> ();
+        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     public void ReciveTarget(Transform dest)
@@ -29,16 +30,20 @@ public class NavMeshMovement : MonoBehaviour
     }
     void Update()
     {
-        // Move();
-        // if(destination.hasChanged)
         // if (destination != null)
         //     navMeshAgent.SetDestination(new Vector3(destination.position.x, 5, destination.position.z));
     }
-    public void MoveTo(Transform target)
+    public void MoveTo(Vector3 position)
     {
-        if (target != null)
+        if (position != null)
             // navMeshAgent.SetDestination(new Vector3(destination.position.x, 0, destination.position.z));
-            navMeshAgent.SetDestination(new Vector3(target.position.x, 0, target.position.z));
+            navMeshAgent.SetDestination(new Vector3(position.x, 0, position.z));
+    }
+    public void Scape(Vector3 position)
+    {
+        if (position != null)
+            // navMeshAgent.SetDestination(new Vector3(destination.position.x, 0, destination.position.z));
+            navMeshAgent.SetDestination(new Vector3(position.x, 0, position.z));
     }
 
     public void Patrolling()
@@ -47,7 +52,8 @@ public class NavMeshMovement : MonoBehaviour
 
         if (walkPointSet) navMeshAgent.SetDestination(walkPoint);
 
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
+        // Vector3 distanceToWalkPoint = transform.position - walkPoint;
+        float distanceToWalkPoint = Vector3.Distance(transform.position, walkPoint);
 
         //Walkpoint reached
         if (isStoped)
@@ -55,7 +61,8 @@ public class NavMeshMovement : MonoBehaviour
             walkPointSet = false;
             isStoped = false;
         }
-        if (distanceToWalkPoint.magnitude < 1.0f) {
+        if (/* distanceToWalkPoint.magnitude */ distanceToWalkPoint < 10.0f)
+        {
             walkPointSet = false;
         }
     }
@@ -64,7 +71,7 @@ public class NavMeshMovement : MonoBehaviour
     {
         Vector3 pos = transform.position;
         yield return new WaitForSeconds(1.0f);
-        if ((pos.x - transform.position.x > -0.2f && pos.x - transform.position.x < 0.2f) || transform.position == pos)
+        if ((pos.x - transform.position.x > -0.2f && pos.x - transform.position.x < 0.2f) && (pos.z - transform.position.z > -0.2f && pos.z - transform.position.z < 0.2f) || transform.position == pos)
         {
             isStoped = true;
         }
@@ -82,10 +89,10 @@ public class NavMeshMovement : MonoBehaviour
 
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
         // if (Physics.Raycast(transform.position, walkPoint, 2f)) {
-            walkPointSet = true;
+        walkPointSet = true;
         // }
     }
-    
+
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Target"))

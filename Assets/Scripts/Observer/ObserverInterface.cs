@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ObserverInterface
 {
-    public void NotifyObserver();
+    public void NotifyObserver(string state);
 }

@@ -5,13 +5,19 @@ using UnityEngine;
 public class SubjectPlayer : MonoBehaviour
 {
     public static SubjectPlayer instance;
-    public delegate void MyDelegate();
-    public MyDelegate notify;
+    public List<ObserverInterface> list;
 
     private void Awake() {
         instance = this;
+        list = new List<ObserverInterface>();
     }
-    public void NotifyObserver(){
-        notify();
+    public void AddObserver(ObserverInterface obs){
+        list.Add(obs);
+    }
+    public void NotifyObserver(string state){
+        foreach (ObserverInterface obs in list)
+        {
+            obs.NotifyObserver(state);
+        }
     }
 }

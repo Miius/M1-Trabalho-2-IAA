@@ -13,6 +13,7 @@ public class ScapeStateFSM : StateFSM
     public void Enter() 
     {
         Debug.Log("Enter Scape State");
+        enemy.GetComponent<NavMeshMovement>().MoveTo(-enemy.Target.position);
     }
 
     public void Update() 
@@ -23,10 +24,9 @@ public class ScapeStateFSM : StateFSM
             {
                 enemy.Die();
             }
-            enemy.SetState(new ScapeStateFSM(enemy));
         }
-        else
-            enemy.SetState(new PatrolStateFSM(enemy));
+        // else
+            // enemy.SetState(new PatrolStateFSM(enemy));
     }
 
     public void Exit() 

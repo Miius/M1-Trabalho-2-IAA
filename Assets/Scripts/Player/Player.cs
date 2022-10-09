@@ -18,7 +18,6 @@ public class Player : MonoBehaviour
     #endregion
     
     
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -29,9 +28,20 @@ public class Player : MonoBehaviour
     void Update()
     {   
         //Movement
-        Move();
-        Fall();
-        
+        // Move();
+        // Fall();
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(PowerUp());
+        }
+    }
+
+    IEnumerator PowerUp()
+    {
+        SubjectPlayer.instance.NotifyObserver("coletou");
+        yield return new WaitForSeconds(10.0f);
+        SubjectPlayer.instance.NotifyObserver("liberou");
     }
 
     void Move()

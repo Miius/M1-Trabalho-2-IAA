@@ -5,6 +5,7 @@ public class EnemyMachineFSM : MonoBehaviour, ObserverInterface
 {
     StateFSM state;
     [SerializeField] private Transform target;
+
     public Transform Target
     {
         get { return target; }
@@ -15,7 +16,7 @@ public class EnemyMachineFSM : MonoBehaviour, ObserverInterface
 
     void Start()
     {
-        // SubjectPlayer.instance.notify += NotifyObserver;
+        SubjectPlayer.instance.AddObserver(this);
         Target = GameObject.Find("Player").transform;
         SetState(new PatrolStateFSM(this));
         // energy = 3;
@@ -26,8 +27,12 @@ public class EnemyMachineFSM : MonoBehaviour, ObserverInterface
         state?.Update();
     }
 
-    public void NotifyObserver(){
-        SetState(new ScapeStateFSM(this));
+    public void NotifyObserver(string state){
+        print(state);
+        if(state == "coletou")
+            SetState(new ScapeStateFSM(this));
+        else
+            SetState(new PatrolStateFSM(this));
     }
 
     public void SetState(StateFSM state)
@@ -49,11 +54,10 @@ public class EnemyMachineFSM : MonoBehaviour, ObserverInterface
         bool near = false;
         RaycastHit hit;
         Vector3 tg = new Vector3(target.position.x, 2.5f, target.position.z);
-        if (Physics.Raycast(transform.position, tg, out hit))
+        if (Physics.Raycast(transform.position, TargetDir(), out hit, float.MaxValue))
         {
-            // Debug.DrawLine(transform.position,tg,Color.white,1.0f);
+            // Debug.Log(hit.collider);
             if(hit.collider.transform == target){
-                Debug.DrawLine(transform.position,tg,Color.white,1.0f);
                 near = true;
             }
         }
@@ -61,7 +65,7 @@ public class EnemyMachineFSM : MonoBehaviour, ObserverInterface
     }
     public bool CollideWithTarget()
     {
-        return TargetDir().magnitude < 15.0f;
+        return /* TargetDir().magnitude */ Vector3.Distance(transform.position, target.position) < 10.0f;
     }
 
     // public void Move(Vector3 dir)
@@ -69,6 +73,19 @@ public class EnemyMachineFSM : MonoBehaviour, ObserverInterface
     //     energy -= Time.fixedDeltaTime;
     //     transform.position += dir * speed * Time.fixedDeltaTime;
     // }
+
+    private void OnDrawGizmosSelected() {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, TargetDir(), out hit, float.MaxValue))
+        {
+            if(hit.collider.transform == target){
+                Gizmos.color = Color.blue;
+            }
+            else
+                Gizmos.color = Color.white;
+        }
+        Gizmos.DrawRay(transform.position, TargetDir());
+    }
 
     public void Die()
     {
