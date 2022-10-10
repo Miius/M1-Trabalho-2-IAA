@@ -28,13 +28,8 @@ public class Player : MonoBehaviour
     void Update()
     {   
         //Movement
-        // Move();
-        // Fall();
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(PowerUp());
-        }
+        Move();
+        Fall();
     }
 
     IEnumerator PowerUp()
@@ -63,5 +58,10 @@ public class Player : MonoBehaviour
         {
             velocity.y = 0f;
         }
+    }
+
+    private void OnCollisionEnter(Collision other) {
+
+        
     }
 }

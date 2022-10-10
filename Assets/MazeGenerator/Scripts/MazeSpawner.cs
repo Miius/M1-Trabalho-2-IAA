@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Random = UnityEngine.Random;
 using UnityEngine.AI;
 
 using System.Threading;
@@ -33,8 +34,8 @@ public class MazeSpawner : MonoBehaviour {
 	private BasicMazeGenerator mMazeGenerator = null;
 	
 	//Mudado
-	//[SerializeField] private GameObject keys;
-	//private List<Vector3> placesToSpawnKeysAndItems = new List<Vector3>();
+	[SerializeField] private GameObject keys;
+	private List<Vector3> placesToSpawnKeysAndItems = new List<Vector3>();
 
 	void Start () {
 		if (!FullRandom)
@@ -70,7 +71,7 @@ public class MazeSpawner : MonoBehaviour {
 					float x = column*(CellWidth+(AddGaps?.2f:0));
 					float z = row*(CellHeight+(AddGaps?.2f:0));
 					
-					//placesToSpawnKeysAndItems.Add(new Vector3(x,0,z));
+					placesToSpawnKeysAndItems.Add(new Vector3(x,0,z));
 
 					MazeCell cell = mMazeGenerator.GetMazeCell(row,column);
 					//Instantiate(Floor,new Vector3(x,0,z), Quaternion.Euler(0,0,0)).transform.parent = transform;
@@ -100,7 +101,7 @@ public class MazeSpawner : MonoBehaviour {
 					float x = column*(CellWidth+(AddGaps?.2f:0));
 					float z = row*(CellHeight+(AddGaps?.2f:0));
 					
-					//placesToSpawnKeysAndItems.Add(new Vector3(x,0,z));
+					placesToSpawnKeysAndItems.Add(new Vector3(x,0,z));
 
 					MazeCell cell = mMazeGenerator.GetMazeCell(row,column);
 					//Instantiate(Floor,new Vector3(x,0,z), Quaternion.Euler(0,0,0)).transform.parent = transform;
@@ -142,13 +143,13 @@ public class MazeSpawner : MonoBehaviour {
 			}
 		}
 		
-		/*for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 3; i++)
 		{
 			GameObject key;
 			int randomPlace = Random.Range(1, placesToSpawnKeysAndItems.Count-1);
 			key = Instantiate(keys,placesToSpawnKeysAndItems[randomPlace], Quaternion.Euler(0,0,0)) as GameObject;
 			
 			placesToSpawnKeysAndItems.RemoveAt(randomPlace);
-		}*/
+		}
 	}
 }

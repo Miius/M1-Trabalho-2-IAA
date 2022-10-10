@@ -11,6 +11,8 @@ public class EnemyMachineFSM : MonoBehaviour, ObserverInterface
         get { return target; }
         set { target = value; }
     }
+
+    public Transform startPosition;
     // public float speed;
     // public float energy;
 
@@ -19,6 +21,7 @@ public class EnemyMachineFSM : MonoBehaviour, ObserverInterface
         SubjectPlayer.instance.AddObserver(this);
         Target = GameObject.Find("Player").transform;
         SetState(new PatrolStateFSM(this));
+        startPosition = this.transform;
         // energy = 3;
     }
 
@@ -93,6 +96,6 @@ public class EnemyMachineFSM : MonoBehaviour, ObserverInterface
     }
     public void GotThePlayer()
     {
-        SceneManager.LoadScene("Teste");
+        SceneManager.LoadScene("Game");
     }
 }

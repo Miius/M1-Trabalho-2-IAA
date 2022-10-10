@@ -93,11 +93,11 @@ public class NavMeshMovement : MonoBehaviour
         // }
     }
 
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Target"))
-            destination = null;
-    }
+    // public void OnTriggerEnter(Collider other)
+    // {
+    //     if (other.CompareTag("Target"))
+    //         destination = null;
+    // }
 
     private void OnDrawGizmosSelected()
     {

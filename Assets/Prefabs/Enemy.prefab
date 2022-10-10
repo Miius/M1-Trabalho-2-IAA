@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 5557582126797485618}
   - component: {fileID: -689310360508470754}
   - component: {fileID: 789785044212816242}
-  - component: {fileID: 3135988071242846656}
   - component: {fileID: 8252107139955717686}
   m_Layer: 0
   m_Name: Enemy
@@ -32,7 +31,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7981420963629791949}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 7, y: 7, z: 7}
   m_ConstrainProportionsScale: 0
@@ -237,9 +236,9 @@ NavMeshAgent:
   m_GameObject: {fileID: 7981420963629791949}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 2
+  m_Radius: 0.75
   m_Speed: 50
-  m_Acceleration: 25
+  m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 360
   m_StoppingDistance: 10
@@ -263,18 +262,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 0}
---- !u!114 &3135988071242846656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7981420963629791949}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2656d9e3533f564cb23ef5747e45c5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  walkPoint: {x: 0, y: 0, z: 0}
+  walkPointSet: 0
+  walkPointRange: 100
+  isStoped: 0
 --- !u!114 &8252107139955717686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,3 +278,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85cf546da592bcf41b7e7320220bda83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}

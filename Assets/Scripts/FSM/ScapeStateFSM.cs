@@ -13,7 +13,7 @@ public class ScapeStateFSM : StateFSM
     public void Enter() 
     {
         Debug.Log("Enter Scape State");
-        enemy.GetComponent<NavMeshMovement>().MoveTo(-enemy.Target.position);
+        enemy.GetComponent<NavMeshMovement>().MoveTo(enemy.startPosition.position);
     }
 
     public void Update() 
