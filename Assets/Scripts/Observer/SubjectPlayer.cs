@@ -14,6 +14,9 @@ public class SubjectPlayer : MonoBehaviour
     public void AddObserver(ObserverInterface obs){
         list.Add(obs);
     }
+    public void RemoveObserver(ObserverInterface obs){
+        list.Remove(obs);
+    }
     public void NotifyObserver(string state){
         foreach (ObserverInterface obs in list)
         {

@@ -65,7 +65,15 @@ public class FPMovement : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if(other.gameObject.CompareTag("PowerUp"))
         {
-            Destroy(other.gameObject);
+            try
+            {
+                Destroy(other.gameObject);
+                SubjectPlayer.instance.RemoveObserver(other.gameObject.GetComponent<EnemyMachineFSM>());
+            }
+            catch (System.Exception)
+            {
+                throw;
+            }
             GameManager.instance.AddPowerUps();
             StartCoroutine(PowerUp());
         }
