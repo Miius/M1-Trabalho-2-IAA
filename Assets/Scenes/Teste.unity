@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -194,6 +194,7 @@ MonoBehaviour:
   CellWidth: 32
   CellHeight: 32
   AddGaps: 0
+  keys: {fileID: 0}
 --- !u!4 &361493934
 Transform:
   m_ObjectHideFlags: 0
@@ -413,6 +414,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9002394134760035742, guid: 41306127cb89c21408d6c0fc3f9c5488, type: 3}
+      propertyPath: MinDistance
+      value: 86.94
+      objectReference: {fileID: 0}
+    - target: {fileID: -9002394134760035742, guid: 41306127cb89c21408d6c0fc3f9c5488, type: 3}
+      propertyPath: DopplerLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -9002394134760035742, guid: 41306127cb89c21408d6c0fc3f9c5488, type: 3}
+      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -9002394134760035742, guid: 41306127cb89c21408d6c0fc3f9c5488, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -9002394134760035742, guid: 41306127cb89c21408d6c0fc3f9c5488, type: 3}
+      propertyPath: reverbZoneMixCustomCurve.m_Curve.Array.data[0].value
+      value: 0.955
+      objectReference: {fileID: 0}
     - target: {fileID: 789785044212816242, guid: 41306127cb89c21408d6c0fc3f9c5488, type: 3}
       propertyPath: destination
       value: 

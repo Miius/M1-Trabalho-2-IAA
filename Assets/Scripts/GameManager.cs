@@ -35,7 +35,7 @@ public class GameManager : MonoBehaviour
     }
     public void AddPowerUps(){
         powerUps++;
-        if (powerUps >= 5)
+        if (powerUps >= 3)
         {
             SceneManager.LoadScene("Win");
         }
